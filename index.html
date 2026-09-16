@@ -1,66 +1,106 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ferramentas — Praia Digital</title>
-  <meta name="description" content="Calculadoras e simuladores para imóveis no litoral paulista: ROI, ocupação, preço ideal e mais.">
-  <link rel="canonical" href="https://praia.digital/ferramentas/">
-  <meta name="robots" content="index, follow">
-  <style>
-    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
-    * { box-sizing: border-box; }
-    body { margin: 0; background: #0b1220; color: #e8ecf1; }
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 22px; }
-    h1 { font-size: 22px; margin: 0 0 6px; }
-    p.lead { margin: 0 0 22px; opacity: .8; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
-    .card { background: #121c2e; border: 1px solid #243348; border-radius: 14px; padding: 18px; }
-    .card h2 { margin: 0 0 8px; font-size: 17px; }
-    .card p { margin: 0 0 12px; opacity: .75; font-size: 14px; }
-    .btn { display: inline-block; padding: 9px 12px; border-radius: 10px; background: #1f6feb; color: #fff; text-decoration: none; font-weight: 600; font-size: 13px; }
-    footer { margin-top: 22px; opacity: .6; font-size: 12px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kit do Anfitrião — Ferramentas Gratuitas | Praia Digital</title>
+<meta name="description" content="Calculadora Airbnb, checklist de temporada e gerador de mensagem de boas-vindas para anfitriões do litoral.">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,sans-serif}
+  body{background:#f0f9ff;color:#0f172a;min-height:100vh}
+  header{background:linear-gradient(135deg,#0077B6,#00B4D8);color:#fff;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+  header a{color:#fff;text-decoration:none;font-weight:700}
+  .logo{font-size:1.2rem}
+  main{max-width:760px;margin:2rem auto;padding:0 1rem}
+  .card{background:#fff;border-radius:16px;padding:1.75rem;box-shadow:0 4px 24px rgba(0,60,100,.08);margin-bottom:1.5rem}
+  h1{font-size:1.5rem;color:#0077B6}h2{font-size:1.15rem;color:#0077B6;margin-bottom:.75rem}
+  .sub{color:#64748b;margin:.3rem 0 1.2rem;font-size:.95rem}
+  label{display:block;font-weight:600;font-size:.85rem;margin:.9rem 0 .3rem}
+  input,textarea,select{width:100%;padding:.7rem;border:1px solid #cbd5e1;border-radius:10px;font-size:1rem;font-family:inherit}
+  button.calc{width:100%;margin-top:1.2rem;padding:.85rem;border:0;border-radius:12px;background:#0077B6;color:#fff;font-weight:800;cursor:pointer}
+  .out{margin-top:1.1rem;background:#ecfeff;border:1px solid #67e8f9;border-radius:12px;padding:1rem;display:none;white-space:pre-wrap}
+  .out b{color:#0369a1}
+  .chk{display:flex;gap:.6rem;align-items:center;padding:.5rem .6rem;border-radius:8px;cursor:pointer;font-size:.95rem}
+  .chk:hover{background:#f1f5f9}.chk input{width:auto}
+  .chk.done{opacity:.5;text-decoration:line-through}
+  #barra{height:8px;background:#e2e8f0;border-radius:99px;margin:.8rem 0;overflow:hidden}
+  #barra div{height:100%;background:linear-gradient(90deg,#0077B6,#00B4D8);width:0;transition:width .3s}
+  footer{background:#023047;color:#cbd5e1;padding:2rem 1.5rem;margin-top:2rem}
+  footer h4{color:#fff;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.8rem}
+  .links{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem}.links a{color:#90E0EF;text-decoration:none;font-size:.85rem}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>Ferramentas</h1>
-    <p class="lead">Calculadoras e simuladores gratuitos para imóveis e temporada no litoral paulista.</p>
-    <div class="grid">
-      <article class="card"><h2>Área Administrador Airbnb</h2><p>Hub operacional: yield, SEO, rotina e faturamento.</p><a class="btn" href="airbnb-admin.html">Abrir</a></article>
-      <article class="card"><h2>Calculadora de ocupação</h2><p>Estime a ocupação anual do imóvel por temporada e long stay.</p><a class="btn" href="calculadora-ocupacao-airbnb-2026.html">Abrir</a></article>
-      <article class="card"><h2>Simulador de ROI</h2><p>Compare retorno entre temporada, aluguel anual e venda.</p><a class="btn" href="calculadora-roi-temporada.html">Abrir</a></article>
-      <article class="card"><h2>Calculadora de diária ideal</h2><p>Ajuste preço por data, temporada e ocupação alvo.</p><a class="btn" href="calculadora-diaria-ideal-airbnb-2026.html">Abrir</a></article>
-      <article class="card"><h2>Calculadora de limpeza</h2><p>Custo operacional por estadia.</p><a class="btn" href="calculadora-limpeza-airbnb-2026.html">Abrir</a></article>
-      <article class="card"><h2>Comparador Airbnb x Aluguel</h2><p>Rentabilidade e liquidez lado a lado.</p><a class="btn" href="comparador-airbnb-aluguel-tradicional-2026.html">Abrir</a></article>
-      <article class="card"><h2>Estimativa anual de faturamento</h2><p>Projeção anual com sazonalidade.</p><a class="btn" href="estimativa-faturamento-anual-airbnb-2026.html">Abrir</a></article>
-      <article class="card"><h2>Calendário de eventos</h2><p>Datas de alta e baixa temporada.</p><a class="btn" href="calendario-eventos-airbnb-2026.html">Abrir</a></article>
-      <article class="card"><h2>Avaliação de preço</h2><p>Avalie seu imóvel com dados de mercado e micro localização.</p><a class="btn" href="avaliacao-preco.html">Abrir</a></article>
-      <article class="card"><h2>Geração de descrições</h2><p>Crie descrições de anúncios automaticamente.</p><a class="btn" href="geracao-descricoes.html">Abrir</a></article>
-      <article class="card"><h2>Assistente virtual</h2><p>Atendimento automatizado para compradores.</p><a class="btn" href="assistente-virtual.html">Abrir</a></article>
-      <article class="card"><h2>Simulador de rendimento Airbnb</h2><p>Estimativa de receita por mês.</p><a class="btn" href="simulador-rendimento-airbnb-2026.html">Abrir</a></article>
-      <article class="card"><h2>Pré-qualificação de crédito</h2><p>Verifique sua capacidade de financiamento.</p><a class="btn" href="pre-qualificacao-credito-2026.html">Abrir</a></article>
-      <article class="card"><h2>Integração PriceLabs</h2><p>Ajuste dinâmico de preço.</p><a class="btn" href="pricelabs-airbnb-2026.html">Abrir</a></article>
-      <article class="card"><h2>Integração Stays</h2><p>Otimização de fluxo de entrada/saída.</p><a class="btn" href="stays-airbnb-2026.html">Abrir</a></article>
-      <article class="card"><h2>Recomendação de imóveis</h2><p>Sugestões personalizadas por perfil.</p><a class="btn" href="recomendacao-imoveis.html">Abrir</a></article>
-      <article class="card"><h2>Vale a pena comprar?</h2><p>Análise compra vs aluguel no litoral.</p><a class="btn" href="vale-a-pena-comprar-2026.html">Abrir</a></article>
-    </div>
-    <footer>Praia Digital — conteúdo informativo, não constitui aconselhamento financeiro.</footer>
+<header>
+  <a class="logo" href="https://praia.digital/">🏖️ Praia Digital</a>
+  <a href="https://praia.digital/apps">← Todos os apps</a>
+</header>
+<main>
+  <div class="card">
+    <h2>💰 Calculadora Airbnb</h2>
+    <p class="sub">Receita líquida real, já descontando a taxa da plataforma.</p>
+    <label>Diária média (R$)</label><input type="number" id="aDiaria" value="420">
+    <label>Noites ocupadas por mês</label><input type="number" id="aNoites" value="16">
+    <label>Custos mensais (limpeza, condomínio, energia) R$</label><input type="number" id="aCustos" value="1500">
+    <button class="calc" onclick="airbnb()">Calcular</button>
+    <div class="out" id="aOut"></div>
   </div>
-<hr style="margin:40px 0 20px;border:none;border-top:1px solid #243348">
-<nav style="font-family:system-ui,sans-serif;font-size:.95em;text-align:center;padding:0 16px 32px;color:#94a3b8">
-<strong>Rede Praia Digital:</strong><br>
-<a href="https://praia.digital/">Praia Digital</a> ·
-<a href="https://praiadigital.github.io/apps/">Todos os apps</a> ·
-<a href="https://praiadigital.github.io/ferramentas/">Ferramentas</a> ·
-<a href="https://praiadigital.github.io/calculadoras/">Calculadoras</a> ·
-<a href="https://praiadigital.github.io/simulador-roi/">Simulador ROI</a> ·
-<a href="https://praiadigital.github.io/simulador-credito/">Simulador de Crédito</a> ·
-<a href="https://praiadigital.github.io/area-anfitriao/">Área do Anfitrião</a> ·
-<a href="https://praiadigital.github.io/guia-litoral/">Guia do Litoral</a> ·
-<a href="https://praiadigital.github.io/blog-litoral/">Blog</a> ·
-<a href="https://praiadigital.github.io/hermes-agents/">Hermes Agents</a> ·
-<a href="https://praiadigital.github.io/investidores/">Investidores</a>
-</nav>
+  <div class="card">
+    <h2>✅ Checklist do Imóvel Pronto para Temporada</h2>
+    <div id="barra"><div></div></div>
+    <p id="pct" class="sub" style="margin:0 0 .5rem">0% completo</p>
+    <div id="lista"></div>
+  </div>
+  <div class="card">
+    <h2>💬 Gerador de Mensagem de Boas-vindas</h2>
+    <label>Nome do hóspede</label><input id="mNome" value="Maria">
+    <label>Nome do imóvel</label><input id="mImovel" value="Apto Vista Mar — Praia Grande">
+    <label>Horário de check-in</label><input id="mCheckin" value="15h">
+    <button class="calc" onclick="msg()">Gerar mensagem</button>
+    <div class="out" id="mOut"></div>
+  </div>
+</main>
+<footer>
+  <h4>Rede de apps Praia Digital</h4>
+  <div class="links">
+    <a href="https://praia.digital/area-anfitriao">Área do Anfitrião</a>
+    <a href="https://praia.digital/avaliador-imoveis">Avaliador IA</a>
+    <a href="https://praia.digital/simulador-roi">Simulador ROI</a>
+    <a href="https://praia.digital/calculadoras">Calculadoras</a>
+    <a href="https://praia.digital/gerador-descricoes">Gerador de Descrições</a>
+    <a href="https://praia.digital/portal-corretores">Portal do Corretor</a>
+    <a href="https://praia.digital/guia-litoral">Guia do Litoral</a>
+    <a href="https://praia.digital/blog-litoral">Blog</a>
+  </div>
+</footer>
+<script>
+var fmt=function(n){return n.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0})};
+function airbnb(){
+  var d=parseFloat(document.getElementById('aDiaria').value)||0, n=parseFloat(document.getElementById('aNoites').value)||0, c=parseFloat(document.getElementById('aCustos').value)||0;
+  var bruta=d*n, taxa=bruta*0.15, liq=bruta-taxa-c;
+  var e=document.getElementById('aOut');
+  e.innerHTML='Receita bruta: '+fmt(bruta)+'\nTaxa plataforma (~15%): -'+fmt(taxa)+'\nCustos: -'+fmt(c)+'\nLíquido mensal: <b>'+fmt(liq)+'</b> · anual: <b>'+fmt(liq*12)+'</b>';
+  e.style.display='block';
+}
+var itens=['Roupa de cama e banho completas','Utensílios de cozinha funcionais','Wi-Fi testado e senha visível','Guia da casa com regras e dicas','Fotos profissionais atualizadas','Check-in autônomo (fechadura/cofre)','Kit de limpeza entre estadias','Contatos de emergência visíveis','Ar-condicionado/ventiladores ok','Seguro ou caução definido'];
+var lista=document.getElementById('lista');
+itens.forEach(function(t,i){
+  var l=document.createElement('label');l.className='chk';
+  l.innerHTML='<input type="checkbox" onchange="upd(this)"> '+t;
+  lista.appendChild(l);
+});
+function upd(inp){
+  inp.parentElement.classList.toggle('done',inp.checked);
+  var c=lista.querySelectorAll('input:checked').length;
+  document.querySelector('#barra div').style.width=(c/itens.length*100)+'%';
+  document.getElementById('pct').textContent=Math.round(c/itens.length*100)+'% completo';
+}
+function msg(){
+  var n=document.getElementById('mNome').value, i=document.getElementById('mImovel').value, c=document.getElementById('mCheckin').value;
+  var e=document.getElementById('mOut');
+  e.textContent='Olá, '+n+'! 🌊\n\nSeja muito bem-vindo(a) ao '+i+'!\n\nSeu check-in está confirmado a partir das '+c+'. O acesso é autônomo e enviarei as instruções no dia da chegada.\n\nNo imóvel você encontra Wi-Fi, roupa de cama e um guia com as melhores praias e restaurantes da região.\n\nQualquer dúvida, estou à disposição. Boas férias! 🏖️';
+  e.style.display='block';
+}
+</script>
 </body>
 </html>
