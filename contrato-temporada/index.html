@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerador de Contrato de Temporada — Praia Digital</title>
+<meta name="description" content="Gere uma minuta de contrato de locação de temporada personalizada para seu imóvel no litoral.">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,sans-serif}
+  body{background:#f0f9ff;color:#0f172a;min-height:100vh}
+  header{background:linear-gradient(135deg,#0077B6,#00B4D8);color:#fff;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+  header a{color:#fff;text-decoration:none;font-weight:700}.logo{font-size:1.2rem}
+  main{max-width:720px;margin:2rem auto;padding:0 1rem}
+  .card{background:#fff;border-radius:16px;padding:1.75rem;box-shadow:0 4px 24px rgba(0,60,100,.08)}
+  h1{font-size:1.5rem;color:#0077B6}.sub{color:#64748b;margin:.3rem 0 1.2rem;font-size:.95rem}
+  label{display:block;font-weight:600;font-size:.85rem;margin:.9rem 0 .3rem}
+  input{width:100%;padding:.7rem;border:1px solid #cbd5e1;border-radius:10px;font-size:1rem}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:0 1rem}
+  @media(max-width:600px){.grid{grid-template-columns:1fr}}
+  button{width:100%;margin-top:1.3rem;padding:.9rem;border:0;border-radius:12px;background:#0077B6;color:#fff;font-weight:800;font-size:1rem;cursor:pointer}
+  #out{display:none;margin-top:1.2rem;background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;padding:1.25rem;white-space:pre-wrap;font-size:.88rem;line-height:1.7;max-height:420px;overflow-y:auto}
+  .copy{margin-top:.75rem;padding:.6rem 1rem;border:1px solid #0077B6;background:#fff;color:#0077B6;border-radius:10px;font-weight:700;cursor:pointer;display:none}
+  .aviso{margin-top:1rem;background:#fef9c3;border:1px solid #fde047;border-radius:12px;padding:1rem;font-size:.85rem}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="https://praia.digital/">🏖️ Praia Digital</a>
+  <a href="https://praia.digital/ferramentas">← Kit do Anfitrião</a>
+</header>
+<main>
+  <div class="card">
+    <h1>📄 Minuta de Contrato de Temporada</h1>
+    <p class="sub">Preencha os dados e gere uma minuta baseada na Lei do Inquilinato (art. 48, locação de temporada).</p>
+    <div class="grid">
+      <div><label>Proprietário(a)</label><input id="dono" value="João da Silva"></div>
+      <div><label>Hóspede/Locatário(a)</label><input id="hospede" value="Maria Souza"></div>
+      <div><label>Endereço do imóvel</label><input id="end" value="Av. da Praia, 1000 - Praia Grande/SP"></div>
+      <div><label>Período</label><input id="periodo" value="20/12/2026 a 05/01/2027"></div>
+      <div><label>Valor total (R$)</label><input id="valor" type="number" value="6500"></div>
+      <div><label>Caução (R$)</label><input id="caucao" type="number" value="1000"></div>
+    </div>
+    <button onclick="gerar()">Gerar minuta</button>
+    <div id="out"></div>
+    <button class="copy" id="cp" onclick="navigator.clipboard.writeText(document.getElementById('out').textContent);this.textContent='✅ Copiado!'">📋 Copiar contrato</button>
+    <div class="aviso">⚠️ Esta é uma minuta simplificada para referência. Para contratos de maior valor, recomende revisão jurídica. Gerencie suas reservas na <a href="https://praia.digital/area-anfitriao" style="color:#854d0e;font-weight:700">Área do Anfitrião</a>.</div>
+  </div>
+</main>
+<script>
+var fmt=function(n){return n.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:2})};
+function gerar(){
+  var g=function(id){return document.getElementById(id).value};
+  var txt='CONTRATO DE LOCAÇÃO PARA TEMPORADA (Lei 8.245/91, art. 48)\n\n'+
+  'LOCADOR: '+g('dono')+'\nLOCATÁRIO: '+g('hospede')+'\n\n'+
+  'CLÁUSULA 1ª — DO OBJETO\nO LOCADOR cede ao LOCATÁRIO, para fins de temporada, o imóvel situado em '+g('end')+', mobiliado e equipado conforme inventário anexo.\n\n'+
+  'CLÁUSULA 2ª — DO PRAZO\nO período de locação será de '+g('periodo')+', não podendo exceder 90 (noventa) dias, nos termos legais.\n\n'+
+  'CLÁUSULA 3ª — DO VALOR E PAGAMENTO\nO valor total da locação é de '+fmt(parseFloat(g('valor'))||0)+', pago antecipadamente. Fica constituído caução de '+fmt(parseFloat(g('caucao'))||0)+', devolvido em até 5 dias úteis após o checkout, descontados eventuais danos.\n\n'+
+  'CLÁUSULA 4ª — DAS OBRIGAÇÕES\nO LOCATÁRIO obriga-se a: usar o imóvel exclusivamente para fins residenciais de temporada; não sublocar; respeitar as regras do condomínio; devolver o imóvel nas condições recebidas.\n\n'+
+  'CLÁUSULA 5ª — DO FORO\nFica eleito o foro da comarca do imóvel para dirimir eventuais controvérsias.\n\n'+
+  'E, por estarem de acordo, as partes assinam o presente instrumento.\n\n_____________________________\n'+g('dono')+' (Locador)\n\n_____________________________\n'+g('hospede')+' (Locatário)';
+  document.getElementById('out').textContent=txt;
+  document.getElementById('out').style.display='block';
+  document.getElementById('cp').style.display='inline-block';
+}
+</script>
+</body>
+</html>
