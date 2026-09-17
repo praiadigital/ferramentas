@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia Digital do Hóspede — Praia Digital</title>
+<meta name="description" content="Gere um guia digital completo do seu imóvel para enviar aos hóspedes: Wi-Fi, regras, dicas e emergências.">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,sans-serif}
+  body{background:#f0f9ff;color:#0f172a;min-height:100vh}
+  header{background:linear-gradient(135deg,#0077B6,#00B4D8);color:#fff;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+  header a{color:#fff;text-decoration:none;font-weight:700}.logo{font-size:1.2rem}
+  main{max-width:680px;margin:2rem auto;padding:0 1rem}
+  .card{background:#fff;border-radius:16px;padding:1.75rem;box-shadow:0 4px 24px rgba(0,60,100,.08)}
+  h1{font-size:1.5rem;color:#0077B6}.sub{color:#64748b;margin:.3rem 0 1.2rem;font-size:.95rem}
+  label{display:block;font-weight:600;font-size:.85rem;margin:.9rem 0 .3rem}
+  input,textarea{width:100%;padding:.7rem;border:1px solid #cbd5e1;border-radius:10px;font-size:1rem;font-family:inherit}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:0 1rem}
+  @media(max-width:600px){.grid{grid-template-columns:1fr}}
+  button{width:100%;margin-top:1.3rem;padding:.9rem;border:0;border-radius:12px;background:#0077B6;color:#fff;font-weight:800;font-size:1rem;cursor:pointer}
+  #out{display:none;margin-top:1.2rem;background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;padding:1.25rem;white-space:pre-wrap;font-size:.9rem;line-height:1.7;max-height:420px;overflow-y:auto}
+  .copy{margin-top:.75rem;padding:.6rem 1rem;border:1px solid #0077B6;background:#fff;color:#0077B6;border-radius:10px;font-weight:700;cursor:pointer;display:none}
+  .dica{margin-top:1rem;background:#ecfeff;border:1px solid #67e8f9;border-radius:12px;padding:1rem;font-size:.9rem}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="https://praia.digital/">🏖️ Praia Digital</a>
+  <a href="https://praia.digital/ferramentas">← Kit do Anfitrião</a>
+</header>
+<main>
+  <div class="card">
+    <h1>📖 Guia Digital do Hóspede</h1>
+    <p class="sub">Envie antes do check-in e reduza 80% das perguntas repetidas.</p>
+    <div class="grid">
+      <div><label>Nome do imóvel</label><input id="nome" value="Apto Vista Mar"></div>
+      <div><label>Endereço</label><input id="end" value="Av. da Praia, 1000 — Praia Grande"></div>
+      <div><label>Rede Wi-Fi</label><input id="wifi" value="VistaMar_5G"></div>
+      <div><label>Senha Wi-Fi</label><input id="senha" value="praia2026"></div>
+      <div><label>Check-in / Check-out</label><input id="horario" value="15h / 11h"></div>
+      <div><label>Seu WhatsApp</label><input id="wa" value="(11) 95434-6288"></div>
+    </div>
+    <label>3 dicas locais (uma por linha)</label>
+    <textarea id="dicas" rows="3">Quiosque do Zé — melhor pastel da orla
+Praia do Forte — 10 min a pé, mar calmo
+Feirinha de quinta na praça central</textarea>
+    <button onclick="gerar()">Gerar guia</button>
+    <div id="out"></div>
+    <button class="copy" id="cp" onclick="navigator.clipboard.writeText(document.getElementById('out').textContent);this.textContent='✅ Copiado!'">📋 Copiar guia</button>
+    <div class="dica">📋 Combine com as <a href="https://praia.digital/ferramentas/regras-da-casa/" style="color:#0077B6;font-weight:700">Regras da Casa</a> e a mensagem de boas-vindas do <a href="https://praia.digital/ferramentas" style="color:#0077B6;font-weight:700">Kit do Anfitrião</a>.</div>
+  </div>
+</main>
+<script>
+function gerar(){
+  var g=function(id){return document.getElementById(id).value};
+  var txt='📖 GUIA DO HÓSPEDE — '+g('nome').toUpperCase()+'\n\n'+
+  '📍 ENDEREÇO\n'+g('end')+'\n\n'+
+  '🕐 CHECK-IN / CHECK-OUT\n'+g('horario')+' — acesso autônomo, instruções enviadas no dia.\n\n'+
+  '📶 WI-FI\nRede: '+g('wifi')+'\nSenha: '+g('senha')+'\n\n'+
+  '🌊 DICAS LOCAIS\n'+g('dicas').split('\n').map(function(d){return '• '+d}).join('\n')+'\n\n'+
+  '🆘 EMERGÊNCIAS\nAnfitrião: '+g('wa')+'\nSAMU: 192 · Bombeiros: 193\n\n'+
+  'Boa estadia! 🏖️';
+  document.getElementById('out').textContent=txt;
+  document.getElementById('out').style.display='block';
+  document.getElementById('cp').style.display='inline-block';
+}
+</script>
+</body>
+</html>
