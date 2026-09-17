@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerador de Regras da Casa — Praia Digital</title>
+<meta name="description" content="Crie um guia de regras da casa claro e amigável para seu imóvel de temporada.">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,sans-serif}
+  body{background:#f0f9ff;color:#0f172a;min-height:100vh}
+  header{background:linear-gradient(135deg,#0077B6,#00B4D8);color:#fff;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+  header a{color:#fff;text-decoration:none;font-weight:700}.logo{font-size:1.2rem}
+  main{max-width:680px;margin:2rem auto;padding:0 1rem}
+  .card{background:#fff;border-radius:16px;padding:1.75rem;box-shadow:0 4px 24px rgba(0,60,100,.08)}
+  h1{font-size:1.5rem;color:#0077B6}.sub{color:#64748b;margin:.3rem 0 1.2rem;font-size:.95rem}
+  label{display:block;font-weight:600;font-size:.85rem;margin:.9rem 0 .3rem}
+  input,select{width:100%;padding:.7rem;border:1px solid #cbd5e1;border-radius:10px;font-size:1rem}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:0 1rem}
+  @media(max-width:600px){.grid{grid-template-columns:1fr}}
+  .checks{display:flex;flex-direction:column;gap:.4rem;margin-top:.5rem}
+  .chk{display:flex;gap:.5rem;align-items:center;font-size:.92rem;font-weight:400;cursor:pointer}
+  .chk input{width:auto}
+  button{width:100%;margin-top:1.3rem;padding:.9rem;border:0;border-radius:12px;background:#0077B6;color:#fff;font-weight:800;font-size:1rem;cursor:pointer}
+  #out{display:none;margin-top:1.2rem;background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;padding:1.25rem;white-space:pre-wrap;font-size:.92rem;line-height:1.7}
+  .copy{margin-top:.75rem;padding:.6rem 1rem;border:1px solid #0077B6;background:#fff;color:#0077B6;border-radius:10px;font-weight:700;cursor:pointer;display:none}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="https://praia.digital/">🏖️ Praia Digital</a>
+  <a href="https://praia.digital/ferramentas">← Kit do Anfitrião</a>
+</header>
+<main>
+  <div class="card">
+    <h1>📋 Regras da Casa</h1>
+    <p class="sub">Um guia claro evita 90% dos problemas. Monte o seu em 1 minuto:</p>
+    <div class="grid">
+      <div><label>Nome do imóvel</label><input id="nome" value="Apto Vista Mar"></div>
+      <div><label>Check-in / Check-out</label><input id="horario" value="15h / 11h"></div>
+      <div><label>Hóspedes máximos</label><input id="max" type="number" value="4"></div>
+      <div><label>Silêncio a partir de</label><input id="silencio" value="22h"></div>
+    </div>
+    <label>Regras adicionais</label>
+    <div class="checks">
+      <label class="chk"><input type="checkbox" value="pets" checked> Aceita pets de pequeno porte</label>
+      <label class="chk"><input type="checkbox" value="fumo"> Proibido fumar dentro do imóvel</label>
+      <label class="chk"><input type="checkbox" value="festas" checked> Festas e eventos não são permitidos</label>
+      <label class="chk"><input type="checkbox" value="lixo" checked> Recolher o lixo na saída</label>
+      <label class="chk"><input type="checkbox" value="ar" checked> Desligar ar-condicionado ao sair</label>
+    </div>
+    <button onclick="gerar()">Gerar guia</button>
+    <div id="out"></div>
+    <button class="copy" id="cp" onclick="navigator.clipboard.writeText(document.getElementById('out').textContent);this.textContent='✅ Copiado!'">📋 Copiar regras</button>
+  </div>
+</main>
+<script>
+function gerar(){
+  var g=function(id){return document.getElementById(id).value};
+  var extras=[].slice.call(document.querySelectorAll('.checks input:checked')).map(function(c){return c.value});
+  var mapa={pets:'🐾 Pets de pequeno porte são bem-vindos (avisar antes).',fumo:'🚭 Proibido fumar dentro do imóvel.',festas:'🎉 Festas e eventos não são permitidos.',lixo:'🗑️ Por favor, recolha o lixo na saída.',ar:'❄️ Desligue o ar-condicionado ao sair.'};
+  var txt='📋 GUIA DA CASA — '+g('nome')+'\n\n'+
+    'Bem-vindo! Para que todos tenham uma ótima estadia, pedimos atenção às regras:\n\n'+
+    '🕐 Check-in / Check-out: '+g('horario')+'\n'+
+    '👥 Máximo de hóspedes: '+g('max')+'\n'+
+    '🤫 Horário de silêncio: a partir das '+g('silencio')+'\n';
+  extras.forEach(function(e){txt+=mapa[e]+'\n'});
+  txt+='\nQualquer problema ou dúvida, chame no WhatsApp — respondemos rápido. Aproveite a praia! 🌊';
+  document.getElementById('out').textContent=txt;
+  document.getElementById('out').style.display='block';
+  document.getElementById('cp').style.display='inline-block';
+}
+</script>
+</body>
+</html>
