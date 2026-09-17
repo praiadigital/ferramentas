@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventário do Imóvel de Temporada — Praia Digital</title>
+<meta name="description" content="Liste todos os itens do seu imóvel de temporada com quantidades — anexe ao contrato e evite prejuízos.">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,sans-serif}
+  body{background:#f0f9ff;color:#0f172a;min-height:100vh}
+  header{background:linear-gradient(135deg,#0077B6,#00B4D8);color:#fff;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+  header a{color:#fff;text-decoration:none;font-weight:700}.logo{font-size:1.2rem}
+  main{max-width:680px;margin:2rem auto;padding:0 1rem}
+  .card{background:#fff;border-radius:16px;padding:1.75rem;box-shadow:0 4px 24px rgba(0,60,100,.08)}
+  h1{font-size:1.5rem;color:#0077B6}.sub{color:#64748b;margin:.3rem 0 1rem;font-size:.95rem}
+  .secao{font-weight:800;color:#0077B6;font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;margin:1rem 0 .3rem}
+  .item{display:flex;justify-content:space-between;align-items:center;padding:.4rem .6rem;font-size:.92rem}
+  .item input{width:64px;padding:.3rem .5rem;border:1px solid #cbd5e1;border-radius:8px;text-align:center}
+  button{width:100%;margin-top:1.3rem;padding:.9rem;border:0;border-radius:12px;background:#0077B6;color:#fff;font-weight:800;font-size:1rem;cursor:pointer}
+  #out{display:none;margin-top:1.2rem;background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;padding:1.25rem;white-space:pre-wrap;font-size:.88rem;line-height:1.7;max-height:400px;overflow-y:auto}
+  .copy{margin-top:.75rem;padding:.6rem 1rem;border:1px solid #0077B6;background:#fff;color:#0077B6;border-radius:10px;font-weight:700;cursor:pointer;display:none}
+  .dica{margin-top:1rem;background:#ecfeff;border:1px solid #67e8f9;border-radius:12px;padding:1rem;font-size:.9rem}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="https://praia.digital/">🏖️ Praia Digital</a>
+  <a href="https://praia.digital/ferramentas">← Kit do Anfitrião</a>
+</header>
+<main>
+  <div class="card">
+    <h1>📦 Inventário do Imóvel</h1>
+    <p class="sub">Ajuste as quantidades e gere o inventário para anexar ao contrato de temporada.</p>
+    <div id="lista"></div>
+    <button onclick="gerar()">Gerar inventário</button>
+    <div id="out"></div>
+    <button class="copy" id="cp" onclick="navigator.clipboard.writeText(document.getElementById('out').textContent);this.textContent='✅ Copiado!'">📋 Copiar inventário</button>
+    <div class="dica">📄 Anexe à minuta do <a href="https://praia.digital/ferramentas/contrato-temporada/" style="color:#0077B6;font-weight:700">Contrato de Temporada</a>.</div>
+  </div>
+</main>
+<script>
+var secoes={
+  'Cozinha':['Geladeira','Fogão','Micro-ondas','Jogo de panelas','Pratos','Talheres (jogos)','Copos e taças','Cafeteira'],
+  'Quartos':['Cama de casal','Cama de solteiro','Guarda-roupa','Jogos de cama','Travesseiros','Ar-condicionado/ventilador'],
+  'Banheiro':['Toalhas de banho','Toalhas de rosto','Secador de cabelo'],
+  'Sala e áreas':['Sofá','TV','Mesa de jantar','Cadeiras','Churrasqueira','Vaga de garagem (nº)']
+};
+var lista=document.getElementById('lista');
+Object.keys(secoes).forEach(function(s){
+  var h=document.createElement('p');h.className='secao';h.textContent=s;lista.appendChild(h);
+  secoes[s].forEach(function(item){
+    var d=document.createElement('div');d.className='item';
+    d.innerHTML='<span>'+item+'</span><input type="number" min="0" value="1" data-sec="'+s+'" data-item="'+item+'">';
+    lista.appendChild(d);
+  });
+});
+function gerar(){
+  var hoje=new Date().toLocaleDateString('pt-BR');
+  var txt='📦 INVENTÁRIO DO IMÓVEL — '+hoje+'\nAnexo ao contrato de locação de temporada\n';
+  var atual='';
+  document.querySelectorAll('#lista input').forEach(function(inp){
+    var q=parseInt(inp.value)||0;
+    if(q<=0)return;
+    if(inp.dataset.sec!==atual){atual=inp.dataset.sec;txt+='\n'+atual.toUpperCase()+'\n';}
+    txt+='  '+q+'x '+inp.dataset.item+'\n';
+  });
+  txt+='\nOs itens acima foram conferidos na entrada e serão verificados na saída. Danos ou faltas serão descontados da caução.\n\n_____________________________\nAssinatura do locatário';
+  document.getElementById('out').textContent=txt;
+  document.getElementById('out').style.display='block';
+  document.getElementById('cp').style.display='inline-block';
+}
+</script>
+</body>
+</html>
