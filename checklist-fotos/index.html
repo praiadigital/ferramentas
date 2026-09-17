@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checklist de Fotos que Vendem — Praia Digital</title>
+<meta name="description" content="As 15 fotos essenciais que todo anúncio de imóvel de temporada precisa ter para converter.">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,sans-serif}
+  body{background:#f0f9ff;color:#0f172a;min-height:100vh}
+  header{background:linear-gradient(135deg,#0077B6,#00B4D8);color:#fff;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+  header a{color:#fff;text-decoration:none;font-weight:700}.logo{font-size:1.2rem}
+  main{max-width:680px;margin:2rem auto;padding:0 1rem}
+  .card{background:#fff;border-radius:16px;padding:1.75rem;box-shadow:0 4px 24px rgba(0,60,100,.08)}
+  h1{font-size:1.5rem;color:#0077B6}.sub{color:#64748b;margin:.3rem 0 .8rem;font-size:.95rem}
+  #barra{height:10px;background:#e2e8f0;border-radius:99px;margin:.8rem 0;overflow:hidden}
+  #barra div{height:100%;background:linear-gradient(90deg,#0077B6,#00B4D8);transition:width .3s}
+  .chk{display:flex;gap:.6rem;align-items:flex-start;padding:.55rem .6rem;border-radius:8px;cursor:pointer;font-size:.93rem}
+  .chk:hover{background:#f1f5f9}
+  .chk input{width:auto;margin-top:.2rem}
+  .chk small{color:#64748b;display:block}
+  .chk.done{opacity:.45;text-decoration:line-through}
+  .dica{margin-top:1.2rem;background:#ecfeff;border:1px solid #67e8f9;border-radius:12px;padding:1rem;font-size:.9rem}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="https://praia.digital/">🏖️ Praia Digital</a>
+  <a href="https://praia.digital/ferramentas">← Kit do Anfitrião</a>
+</header>
+<main>
+  <div class="card">
+    <h1>📸 Checklist: Fotos que Vendem</h1>
+    <p class="sub">Anúncios com fotos completas recebem até 2x mais reservas. Progresso salvo no navegador.</p>
+    <div id="barra"><div></div></div>
+    <p id="pct" style="font-size:.85rem;color:#64748b">0% completo</p>
+    <div id="lista"></div>
+    <div class="dica">✒️ Fotos prontas? Escreva o anúncio no <a href="https://praia.digital/gerador-descricoes" style="color:#0077B6;font-weight:700">Gerador de Descrições</a> e o título no <a href="https://praia.digital/gerador-descricoes/titulos-anuncio/" style="color:#0077B6;font-weight:700">Gerador de Títulos</a>.</div>
+  </div>
+</main>
+<script>
+var fotos=[
+  ['Foto de capa com o melhor ângulo','A primeira foto decide o clique — use a mais impressionante'],
+  ['Vista da janela/varanda','Vista mar ou área verde valorizam 15%+ o anúncio'],
+  ['Sala de estar ampla','Luz natural, dia claro, horizontal'],
+  ['Cozinha funcional','Mostre que é equipada: fogão, geladeira, utensílios'],
+  ['Cada quarto individualmente','Cama feita, travesseiros arrumados'],
+  ['Banheiro limpo e seco','Toalhas novas, box fechado'],
+  ['Área de lazer / piscina','Se tiver, é o segundo fator de decisão'],
+  ['Fachada ou entrada do prédio','Gera confiança na chegada'],
+  ['Vaga de garagem','Diferencial importante no litoral'],
+  ['Detalhe que encanta','Café na varanda, rede, decoração'],
+  ['Foto noturna aconchegante','Luzes quentes, clima de férias'],
+  ['Rua/entorno tranquilo','Mostre o caminho até a praia'],
+  ['Mapa ou distância da praia','Print de mapa com rota a pé'],
+  ['Churrasqueira/área gourmet','Se houver, destaque sempre'],
+  ['Imóvel arrumado como para hóspede','Simule a estadia perfeita na foto']
+];
+var lista=document.getElementById('lista');
+var salvo={};try{salvo=JSON.parse(localStorage.getItem('pdFotos')||'{}')}catch(e){}
+fotos.forEach(function(f,i){
+  var l=document.createElement('label');l.className='chk'+(salvo[i]?' done':'');
+  var cb=document.createElement('input');cb.type='checkbox';cb.checked=!!salvo[i];
+  cb.onchange=function(){salvo[i]=cb.checked;l.classList.toggle('done',cb.checked);localStorage.setItem('pdFotos',JSON.stringify(salvo));upd()};
+  l.appendChild(cb);
+  var span=document.createElement('span');span.innerHTML='<b>'+(i+1)+'. '+f[0]+'</b><small>'+f[1]+'</small>';
+  l.appendChild(span);lista.appendChild(l);
+});
+function upd(){
+  var c=lista.querySelectorAll('input:checked').length;
+  document.querySelector('#barra div').style.width=(c/fotos.length*100)+'%';
+  document.getElementById('pct').textContent=Math.round(c/fotos.length*100)+'% completo ('+c+'/'+fotos.length+')';
+}
+upd();
+</script>
+</body>
+</html>
